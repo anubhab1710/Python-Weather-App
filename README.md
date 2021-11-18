@@ -1,1 +1,1 @@
-# Python-Weather-App
+# Weather App using Python and Tkinter
