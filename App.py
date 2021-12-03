@@ -1,8 +1,10 @@
-from configparser import ConfigParser
-from tkinter import *
-from tkinter import messagebox
-import requests
+from dotenv import load_dotenv
+from tkinter import Button, Label, Tk, PhotoImage, StringVar, Entry, messagebox
+import requests, os
 from PIL import Image, ImageTk
+
+load_dotenv()
+api_key = os.getenv('key')
 
 app = Tk()
 app.title("Weather App")
@@ -14,12 +16,6 @@ app.configure(bg=color)
 app.iconphoto(False, titlebar_icon)
 
 url = "https://api.openweathermap.org/data/2.5/weather?q={}&appid={}"
-
-config_file = "config.ini"
-config = ConfigParser()
-config.read(config_file)
-api_key = config['api_key']['key']
-
 
 def get_weather(city):
     result = requests.get(url.format(city, api_key))
@@ -80,4 +76,5 @@ weather_lbl = Label(app, text='', font=("Calibri", 22, 'italic'))
 weather_lbl.configure(bg=color)
 weather_lbl.pack()
 
-app.mainloop()
+if __name__ == '__main__':
+    app.mainloop()
